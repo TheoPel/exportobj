@@ -1,0 +1,18 @@
+# script to export Blendshapes
+
+# requier some Blendshapes and to make the scene a project
+
+import maya.cmds as cmds
+path = cmds.workspace(rd=True, q=True)
+print(path)
+
+# you need to select your Blendshapes in the outliner 
+
+selection = cmds.ls(sl=True)
+for obj in selection:
+    cmds.setAttr(obj + '.v', 1)
+    cmds.select(obj)
+    cmds.file(path + '_' + obj + '.obj', 
+    exportSelected = True, 
+    typ = 'OBJexport')
+    cmds.setAttr(obj + '.v', 0)
